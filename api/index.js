@@ -8,7 +8,12 @@ const funtranslationsAxiosInstance = axios.create({
   baseURL: `https://api.funtranslations.com/translate/shakespeare.json?text=`,
 });
 
+const fetchPokemon = (url) => pokeapiAxiosInstance.get(url);
+
+const fetchShakespeareTranslation = (url) =>
+  funtranslationsAxiosInstance.post(url);
+
 module.exports = {
-  pokeapiAxiosInstance,
-  funtranslationsAxiosInstance,
+  fetchPokemon,
+  fetchShakespeareTranslation,
 };
