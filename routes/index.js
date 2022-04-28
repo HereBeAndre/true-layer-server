@@ -1,14 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const {
-  pokeapiAxiosInstance,
-  funtranslationsAxiosInstance,
-} = require("../api");
-
-const fetchPokemon = (url) => pokeapiAxiosInstance.get(url);
-
-const fetchShakespeareTranslation = (url) =>
-  funtranslationsAxiosInstance.post(url);
+const { fetchPokemon, fetchShakespeareTranslation } = require("../api");
+const sanitizeString = require("../utils/functions.js");
 
 router.get("/pokemon/:name", async function (req, res, next) {
   // TODO: Fix following check on params
@@ -30,8 +23,11 @@ router.get("/pokemon/:name", async function (req, res, next) {
   const pokemonFlavorText =
     pokemonData?.data?.flavor_text_entries[1]?.flavor_text;
 
+  // Sanitize flavor_text before sending it over funtranslations.com
+  const sanitizedPokemonFlavorText = sanitizeString(pokemonFlavorText);
+
   const translationData = await fetchShakespeareTranslation(
-    encodeURIComponent(pokemonFlavorText)
+    encodeURIComponent(sanitizedPokemonFlavorText)
   ).catch((err) =>
     console.log(
       "The following error occurred while fetching the translation: ",
