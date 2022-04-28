@@ -6,19 +6,26 @@ const sanitizeString = require("../utils/functions.js");
 router.get("/pokemon/:name", async function (req, res, next) {
   // TODO: Fix following check on params
   if (!req.params.name || req.params.name.length < 2) {
-    return res.status(400).send({ error: "Must provide a Pokemon name" });
+    return res
+      .status(400)
+      .json({ message: "Must provide a valid Pokemon name" });
   }
   const {
     params: { name: pokemonQuery },
   } = req;
-  /* ! NOTE: Normally, I'd use try-catch blocks.
-  I didn't go for this approach here because the request to `funtranslations.com` results in status 404 every single time */
+
   const pokemonData = await fetchPokemon(pokemonQuery).catch((err) =>
     console.log(
       "The following error occurred while fetching the pokemon: ",
       err
     )
   );
+
+  if (!pokemonData) {
+    return res
+      .status(404)
+      .json({ message: "Seems like this Pokemon doesn't exist" });
+  }
   // TODO: Grab random object in flavor_text_entries array
   const pokemonFlavorText =
     pokemonData?.data?.flavor_text_entries[1]?.flavor_text;

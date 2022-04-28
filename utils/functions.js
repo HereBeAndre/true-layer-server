@@ -1,3 +1,3 @@
-const sanitizeString = (string) => string.replace(/\s+/g, " ").trim();
+const sanitizeString = (string = "") => string.replace(/\s+/g, " ").trim();
 
 module.exports = sanitizeString;
