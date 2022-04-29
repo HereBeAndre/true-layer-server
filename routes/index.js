@@ -18,11 +18,12 @@ router.get("/pokemon/:name", async function (req, res, next) {
     params: { name: pokemonQuery },
   } = req;
 
-  const pokemonData = await fetchPokemon(pokemonQuery).catch((err) =>
-    console.log(
-      "The following error occurred while fetching the pokemon: ",
-      err
-    )
+  const pokemonData = await fetchPokemon(pokemonQuery.toLowerCase()).catch(
+    (err) =>
+      console.log(
+        "The following error occurred while fetching the pokemon: ",
+        err
+      )
   );
 
   if (!pokemonData) {
