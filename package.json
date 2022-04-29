@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "nodemon ./bin/www",
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "jest --port=8080 --watchAll --runInBand"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -16,5 +20,10 @@
     "morgan": "~1.9.1",
     "nodemon": "^2.0.15",
     "postman-request": "^2.88.1-postman.31"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.1",
+    "jest": "^28.0.3",
+    "supertest": "^6.2.3"
   }
 }

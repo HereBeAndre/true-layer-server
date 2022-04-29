@@ -7,8 +7,8 @@ const {
 } = require("../utils/functions.js");
 
 router.get("/pokemon/:name", async function (req, res, next) {
-  const { name } = req.params;
-  // TODO: Fix following check on params
+  const { name = "" } = req.params;
+
   if (!name || validateStringLength(name)) {
     return res
       .status(400)
@@ -34,6 +34,7 @@ router.get("/pokemon/:name", async function (req, res, next) {
   const pokemonFlavorText =
     pokemonData?.data?.flavor_text_entries[1]?.flavor_text;
 
+  // ! TODO: Fix sanitization
   // Sanitize flavor_text before sending it over funtranslations.com
   const sanitizedPokemonFlavorText = sanitizeString(pokemonFlavorText);
 
