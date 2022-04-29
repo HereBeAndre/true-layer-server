@@ -35,7 +35,6 @@ router.get("/pokemon/:name", async function (req, res, next) {
   const pokemonFlavorText =
     pokemonData?.data?.flavor_text_entries[1]?.flavor_text;
 
-  // ! TODO: Fix sanitization
   // Sanitize flavor_text before sending it over funtranslations.com
   const sanitizedPokemonFlavorText = sanitizeString(pokemonFlavorText);
 
@@ -52,7 +51,8 @@ router.get("/pokemon/:name", async function (req, res, next) {
   res.send({
     name: pokemonQuery,
     description:
-      translationData?.data?.contents?.translated || pokemonFlavorText,
+      sanitizeString(translationData?.data?.contents?.translated) ||
+      sanitizedPokemonFlavorText,
   });
 });
 
