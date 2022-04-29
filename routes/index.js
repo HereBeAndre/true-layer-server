@@ -1,11 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const { fetchPokemon, fetchShakespeareTranslation } = require("../api");
-const sanitizeString = require("../utils/functions.js");
+const {
+  sanitizeString,
+  validateStringLength,
+} = require("../utils/functions.js");
 
 router.get("/pokemon/:name", async function (req, res, next) {
+  const { name } = req.params;
   // TODO: Fix following check on params
-  if (!req.params.name || req.params.name.length < 2) {
+  if (!name || validateStringLength(name)) {
     return res
       .status(400)
       .json({ message: "Must provide a valid Pokemon name" });
