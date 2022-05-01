@@ -98,10 +98,11 @@ Test files are created under `tests` folder.
 Todo:
 
 - [ ] Implement environment variables management for production, development and testing envs.
+- [ ] RegExp to clean Pokémon description might need a general review.
 
 Known bugs:
 
-- List bugs here
+- [ ] Some Pokémon descriptions returned by Fun Translation API have a leading '/';
 
 ## License
 
