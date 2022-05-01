@@ -4,8 +4,10 @@ const { fetchPokemon, fetchShakespeareTranslation } = require("../api");
 const {
   sanitizeString,
   validateStringLength,
+  generateRandomNumber,
 } = require("../utils/functions.js");
 
+// REQUEST EXAMPLE => http://localhost:8080/pokemon/charizard
 router.get("/pokemon/:name", async function (req, res, next) {
   const { name = "" } = req.params;
 
@@ -31,9 +33,8 @@ router.get("/pokemon/:name", async function (req, res, next) {
       message: "Ok, you gotta catch 'em all... But this Pokemon doesn't exist.",
     });
   }
-  // TODO: Grab random object in flavor_text_entries array
   const pokemonFlavorText =
-    pokemonData?.data?.flavor_text_entries[1]?.flavor_text;
+    pokemonData?.data?.flavor_text_entries[generateRandomNumber()]?.flavor_text;
 
   // Sanitize flavor_text before sending it over funtranslations.com
   const sanitizedPokemonFlavorText = sanitizeString(pokemonFlavorText);
