@@ -27,9 +27,9 @@ router.get("/pokemon/:name", async function (req, res, next) {
   );
 
   if (!pokemonData) {
-    return res
-      .status(404)
-      .json({ message: "Seems like this Pokemon doesn't exist" });
+    return res.status(404).json({
+      message: "Ok, you gotta catch 'em all... But this Pokemon doesn't exist.",
+    });
   }
   // TODO: Grab random object in flavor_text_entries array
   const pokemonFlavorText =
