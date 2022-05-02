@@ -15,11 +15,12 @@
   - [Getting started](#getting-started)
     - [Pre-requisites](#pre-requisites)
     - [Installation](#installation)
-  - [Architecture](#architecture)
-  - [APIs](#apis)
   - [Available Scripts](#available-scripts)
     - [Testing](#testing)
     - [Production Build](#production-build)
+  - [Architecture](#architecture)
+  - [APIs](#apis)
+  - [Requirements](#requirements)
   - [Room for Improvement](#room-for-improvement)
   - [License](#license)
 
@@ -60,18 +61,6 @@ npm start
 
 The server listens on port `8080`.
 
-## Architecture
-
-![Architecture](./public/assets/architecture.png)&nbsp;&nbsp;
-
-## APIs
-
-> - **PokéAPI** - (https://pokeapi.co/)
-> - **Fun Translations API** - (https://funtranslations.com/api/)
-
-> **Note**: Fun Translations API ratelimits the number of public API calls to 60 API calls a day with distribution of 5 calls an hour.\
-> When that limit is exceeded, `true-layer-client` will receive the original Pokémon description provided by PokéAPI.
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -93,12 +82,45 @@ Test files are created under `tests` folder.
 
 [Deploying to production](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/deployment)
 
+## Architecture
+
+![Architecture](./public/assets/architecture.png)&nbsp;&nbsp;
+
+## APIs
+
+> - **PokéAPI** - (https://pokeapi.co/)
+> - **Fun Translations API** - (https://funtranslations.com/api/)
+
+> **Note**: Fun Translations API ratelimits the number of public API calls to 60 API calls a day with distribution of 5 calls an hour.\
+> When that limit is exceeded, `true-layer-client` will receive the original Pokémon description provided by PokéAPI.
+
+## Requirements
+
+- [x] Retrieve Shakespearean description;
+
+Usage example:
+
+```
+GET http://localhost:8080/pokemon/charmander
+```
+
+Output:
+
+```
+{
+  "name": "mewtwo",
+  "description": "'t usually remains motionless to con­ serveth energy, so yond 't may un­ leash its full power in hurlyburly."
+}
+```
+
 ## Room for Improvement
 
 Todo:
 
-- [ ] Implement environment variables management for production, development and testing envs.
-- [ ] RegExp to clean Pokémon description might need a general review.
+- [ ] Dockerize the app;
+- [ ] Implement environment variables management for production, development and testing envs;
+- [ ] Improve test coverage;
+- [ ] RegExp to clean Pokémon description might need a review (/n, /f, etc...)
 
 Known bugs:
 
